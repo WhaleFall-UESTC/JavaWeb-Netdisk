@@ -3,12 +3,15 @@ package com.pan.servlets;
 import com.pan.bean.User;
 import com.pan.dao.UserDAO;
 import com.pan.myssm.myspringmvc.ViewBaseServlet;
+import com.pan.utils.Settings;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @WebServlet("/register")
 public class Register extends ViewBaseServlet {
@@ -28,6 +31,8 @@ public class Register extends ViewBaseServlet {
         UserDAO userDAO = new UserDAO();
         boolean flag = userDAO.register(user);
         if(flag){
+            String fileRoot = new Settings().fileRoot;
+            Files.createDirectories(Paths.get(fileRoot, name));
             System.out.println("Register successfully!");
             request.setAttribute("errorMsg", "Register successfully, please login now!");
             super.processTemplate("index",request,response);
