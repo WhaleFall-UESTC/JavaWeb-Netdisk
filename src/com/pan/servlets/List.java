@@ -15,6 +15,8 @@ import java.io.IOException;
 public class List extends ViewBaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Redirect to listfiles");
+
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
@@ -29,7 +31,12 @@ public class List extends ViewBaseServlet {
         }
         File[] files = file.listFiles();
 
-        request.setAttribute("files", files);
+        request.setAttribute("allfiles", files);
         super.processTemplate("files", request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 }

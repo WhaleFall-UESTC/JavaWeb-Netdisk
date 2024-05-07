@@ -1,2 +1,4 @@
-/files/*
-/out/
+files/*
+out/**
+.idea/
+git 
