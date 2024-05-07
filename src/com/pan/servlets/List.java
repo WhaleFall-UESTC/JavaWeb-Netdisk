@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 @WebServlet("/listfiles")
-public class List extends HttpServlet {
+public class List extends ViewBaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
