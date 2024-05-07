@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        /* 设置 body 元素的样式 */
+        body {
+            font-family: Arial,serif;
+            margin: 0;
+        }
+        a{
+            color: white;
+        }
+        /* 标题 / LOGO */
+        .header {
+            padding: 100px;
+            text-align: center;
+            background: #011816;
+            color: white;
+        }
+        .flex-container {
+            background: white;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<div class="header">
+    <h1>List Files</h1>
+    <a href="file.html" style="text-decoration: none">返回</a>
+</div>
+<br><br>
+
+<div class="flex-container">
+    <form method="get" action="listfiles">
+        User name: <input type="text" name="uname"> <br>
+        <button>List</button>
+    </form>
+</div>
+<br><br>
+
+<div class="flex-container">
+    <table>
+        <tr>
+            <th>名称</th>
+        </tr>
+        <tr th:each="${allfiles}">
+            <td th:text="${f.getName()}">文件名</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

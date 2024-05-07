@@ -1,49 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>upload</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        /* 设置 body 元素的样式 */
+        body {
+            font-family: Arial;
+            margin: 0;
+        }
+
+        /* 标题 / LOGO */
+        .header {
+            padding: 100px;
+            text-align: center;
+            background: #ee9ca7;
+            color: white;
+        }
+    </style>
+    
 </head>
 <body>
+
+<div class="header">
     <h1>Upload File</h1>
-    <form method="post" enctype="multipart/form-data" action="upload">
-        Enter your name:  <input type="text" name="uname"> <br>
-        Upload your file: <input type="file" name="upfile"> <br>
-        <button>Upload</button>
-    </form>
-    <br><br><br>
+</div>
 
-    <h1>Download File</h1>
-    <form method="get" action="download">
-        User name: <input type="text" name="uname"> <br>
-        File to be downloaded: <input type="text" name="downfile" placeholder="Filename"> <br>
-        <button>Download</button>
-    </form>
-    <br><br><br>
+<form method="post" enctype="multipart/form-data" action="upload">
+    Enter your name:  <input type="text" name="uname"> <br>
+    Upload your file: <input type="file" name="upfile"> <br>
+    <button type="submit">Upload</button>
+</form>
 
-    <h1>List Files</h1>
-    <form method="get" action="listfiles">
-        User name: <input type="text" name="uname"> <br>
-        <button>List</button>
-    </form>
-    <br><br><br>
+<div>
+    <a href="file.html">返回</a>
+</div>
 
-    <h1>Delete File</h1>
-    <form method="post" action="delete">
-        User name: <input type="text" name="uname"> <br>
-        File to be deleted: <input type="text" name="deletefile" placeholder="Filename"> <br>
-        <button>Delete</button>
-    </form>
-
-    <!--
-    <table>
-        <tr>
-            <th>name</th>
-        </tr>
-        <tr th:each="f:${allfiles}">
-            <td th:text="${f.getName()}">Filenames</td>
-        </tr>
-    </table>
-    -->
 </body>
 </html>

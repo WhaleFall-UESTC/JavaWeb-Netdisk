@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload</title>
+</head>
+<body>
+    <h1>Upload File</h1>
+    <form method="post" enctype="multipart/form-data" action="upload">
+        Enter your name:  <input type="text" name="uname"> <br>
+        Upload your file: <input type="file" name="upfile"> <br>
+        <button>Upload</button>
+    </form>
+    <br><br><br>
+
+    <h1>Download File</h1>
+    <form method="get" action="download">
+        User name: <input type="text" name="uname"> <br>
+        File to be downloaded: <input type="text" name="downfile" placeholder="Filename"> <br>
+        <button>Download</button>
+    </form>
+    <br><br><br>
+
+    <h1>List Files</h1>
+    <form method="get" action="listfiles">
+        User name: <input type="text" name="uname"> <br>
+        <button>List</button>
+    </form>
+    <br><br><br>
+
+    <h1>Delete File</h1>
+    <form method="post" action="delete">
+        User name: <input type="text" name="uname"> <br>
+        File to be deleted: <input type="text" name="deletefile" placeholder="Filename"> <br>
+        <button>Delete</button>
+    </form>
+
+    <!--
+    <table>
+        <tr>
+            <th>name</th>
+        </tr>
+        <tr th:each="f:${allfiles}">
+            <td th:text="${f.getName()}">Filenames</td>
+        </tr>
+    </table>
+    -->
+</body>
+</html>

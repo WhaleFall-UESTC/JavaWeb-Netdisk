@@ -57,51 +57,6 @@ public class Upload extends HttpServlet {
                 }
             }
         }
-
-//        if (Files.exists(filePath)) {
-//            int tmp = 1;
-//            String[] up = upfilename.split("\\.(?![^\\.]++)");
-//            String newUpfile;
-//            while (true) {
-//                newUpfile = up[0] + String.format(" (%d)", tmp) + up[1];
-//                try {
-//                    part.write(userRoot + "\\" + newUpfile);
-//                    break;
-//                } catch (Exception e_) {
-//                    tmp += 1;
-//                }
-//            }
-//        }
-
-//        try {
-//            part.write(userRoot + "\\" + upfilename);
-//            System.out.println("Upload: " + uname + "\\" + upfilename);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Path root = Paths.get(userRoot);
-//            Path file = Paths.get(userRoot, upfilename);
-//
-//            if (!Files.exists(root)) {
-//                Files.createDirectories(root);
-//            }
-//
-//            if (Files.exists(file)) {
-//                int tmp = 1;
-//                String[] up = upfilename.split("\\.(?![^\\.]++)");
-//                String newUpfile;
-//                while (true) {
-//                    newUpfile = up[0] + String.format(" (%d)", tmp) + up[1];
-//                    try {
-//                        part.write(userRoot + "\\" + newUpfile);
-//                        break;
-//                    } catch (Exception e_) {
-//                        tmp += 1;
-//                    }
-//                }
-//            } else {
-//                part.write(file.toString());
-//            }
-//        }
     }
 
     @Override
