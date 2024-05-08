@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>delete</title>
+    <link rel="stylesheet" href="css/style2.css">
 </head>
 <body>
 
-<h1>Delete File</h1>
+<div class="header">
+    <h1>Delete Files</h1>
+    <a href="select.html" style="text-decoration: none">返回</a>
+</div>
+<br><br>
 
-<form method="post" action="delete">
-    User name: <input type="text" name="uname"> <br>
-    File to be deleted: <input type="text" name="deletefile" placeholder="Filename"> <br>
-    <button>Delete</button>
-</form>
-
-<div>
-    <a href="file.html">返回</a>
+<div class="flex-container">
+    <form method="post" action="delete">
+        <div class="inputbox">
+            User name: <input type="text" name="uname"> <br>
+            File to be deleted: <input type="text" name="deletefile" placeholder="Filename">
+            <br>
+            <button>Delete</button>
+        </div>
+    </form>
 </div>
 
 </body>

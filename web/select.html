@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <title>FILE</title>
+
+    <style>
+
+    </style>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<header>
+    <!-- 页面较小时的导航栏 -->
+    <div class="menu-btn"></div>
+    <!-- 页面较大时的导航 -->
+    <div class="navigation">
+        <div class="navigation-items">
+            <a href="listfiles.html">list</a>
+            <a href="delete.html">delete</a>
+            <a href="upload.html">upload</a>
+            <a href="download.html">download</a>
+            <a href="index.html">logout</a>
+        </div>
+    </div>
+</header>
+
+<!-- home page -->
+<section class="home">
+    <!-- 背景视频 -->
+    <video  class="video-slide active" src="assets/01.mp4" autoplay muted loop></video>
+    <video  class="video-slide" src="assets/02.mp4" autoplay muted loop></video>
+
+    <!-- 绑定active后的页面内容 -->
+    <div class="content active">
+        <h1>小小淫盘，在线选择</h1>
+    </div>
+
+    <div class="content">
+        <h1>About Us<br>筋經導引第四代传承人</h1>
+        <p></p>
+    </div>
+
+    <!-- 切换页面的点点 -->
+    <div class="slider-navigation">
+        <div class="nav-btn active"></div>
+        <div class="nav-btn"></div>
+    </div>
+</section>
+
+<script>
+    // 页面小时的点击式导航栏
+    const menuBtn = document.querySelector(".menu-btn")
+    const navigation = document.querySelector(".navigation")
+
+    menuBtn.addEventListener("click",()=>{
+        // 点击后对应的类变为active
+        menuBtn.classList.toggle("active");
+        navigation.classList.toggle("active");
+    });
+
+    const btns = document.querySelectorAll(".nav-btn")
+    const slides = document.querySelectorAll(".video-slide")
+    const contents = document.querySelectorAll(".content")
+
+    var sliderNav= function(manual){
+        btns.forEach((btn) => {
+            btn.classList.remove("active")
+        })
+
+        slides.forEach((slide) => {
+            slide.classList.remove("active")
+        })
+
+        contents.forEach((content) => {
+            content.classList.remove("active")
+        })
+
+        btns[manual].classList.add("active")
+        slides[manual].classList.add("active")
+        contents[manual].classList.add("active")
+    }
+
+    btns.forEach((btn,i)=>{
+        btn.addEventListener("click",()=>{
+            sliderNav(i)
+        })
+    });
+
+
+    // 滚动动画
+    const elements = document.querySelectorAll('.observer-item')
+
+    const observer = new IntersectionObserver(callback);
+    elements.forEach(ele => {
+        ele.classList.add('opaque')
+        observer.observe(ele);
+    })
+
+
+    function callback(entries, instance) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                element.classList.remove("opaque");
+                element.classList.add("come-in");
+                instance.unobserve(element);
+            }
+        })
+    }
+
+
+
+</script>
+
+
+</body>
+
+</html>

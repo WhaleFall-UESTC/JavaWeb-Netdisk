@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+}
+/* 设置 body 元素的样式 */
+body {
+    font-family: Arial;
+    margin: 0;
+}
+a{
+    color: white;
+}
+/* 标题 / LOGO */
+.header {
+    padding: 100px;
+    text-align: center;
+    background: #4876d9;
+    color: white;
+    font-size: x-large;
+}
+.flex-container {
+    background: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: large;
+}
+.inputbox {
+    position: relative;
+}
+.inputbox input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #9fcdff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #9fcdff;
+    outline: none;
+    background: transparent;
+}

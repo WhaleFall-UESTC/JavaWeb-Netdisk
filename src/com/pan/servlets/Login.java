@@ -28,8 +28,8 @@ public class Login extends ViewBaseServlet {
         if(user != null){
             HttpSession session = request.getSession();
             session.setAttribute("user", user.getName());
-            response.sendRedirect("/listfiles");
-            // 告诉客户端的浏览器重定向到一个新的URL，即服务器上的/listfiles路径
+            response.sendRedirect("/select.html");
+            // 告诉客户端的浏览器重定向到一个新的URL
         } else{
             request.setAttribute("errorMsg", "email or password is wrong!");
             super.processTemplate("index",request,response);
