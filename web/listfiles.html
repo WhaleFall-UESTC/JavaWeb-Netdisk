@@ -16,7 +16,6 @@
 <div class="flex-container">
     <div class="inputbox">
         <form method="get" action="listfiles">
-            User name: <input type="text" name="uname"> <br>
             <button>List</button>
         </form>
     </div>
@@ -28,7 +27,7 @@
         <tr>
             <th>名称</th>
         </tr>
-        <tr th:each="${allfiles}">
+        <tr th:each="f:${allfiles}">
             <td th:text="${f.getName()}">文件名</td>
         </tr>
     </table>

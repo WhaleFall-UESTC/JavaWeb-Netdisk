@@ -30,6 +30,7 @@ public class Upload extends HttpServlet {
 
         String fileRoot = new Settings().fileRoot;
         String userRoot = fileRoot + "\\" + uname;
+        System.out.println(userRoot);
 
         Path rootPath = Paths.get(userRoot);
         Path filePath;
@@ -47,6 +48,7 @@ public class Upload extends HttpServlet {
                 tmp += 1;
             } else {
                 try {
+                    System.out.println("Try upload " + userRoot + "\\" + newUpfile);
                     part.write(userRoot + "\\" + newUpfile);
                     break;
                 } catch (IOException e) {
