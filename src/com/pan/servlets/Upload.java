@@ -4,10 +4,7 @@ import com.pan.utils.Settings;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -22,6 +19,9 @@ public class Upload extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
+
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("user");
 
         // String fileRoot = request.getServletContext().getRealPath("/");
         String uname = request.getParameter("uname");

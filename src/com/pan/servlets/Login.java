@@ -25,14 +25,17 @@ public class Login extends ViewBaseServlet {
         String password = request.getParameter("password");
         UserDAO userDAO = new UserDAO();
         User user = userDAO.login(email, password);
-        if(user != null){
+        if(user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user.getName());
+
             response.sendRedirect("/select.html");
             // 告诉客户端的浏览器重定向到一个新的URL
-        } else{
+
+
+        } else {
             request.setAttribute("errorMsg", "email or password is wrong!");
-            super.processTemplate("index",request,response);
+            super.processTemplate("index", request, response);
         }
     }
     @Override

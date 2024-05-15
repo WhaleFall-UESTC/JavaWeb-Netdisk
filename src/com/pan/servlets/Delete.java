@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,6 +20,9 @@ public class Delete extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         String fileRoot = new Settings().fileRoot;
+
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("user");
 
         String uname = request.getParameter("uname");
         String userRoot = fileRoot + "\\" + uname;
