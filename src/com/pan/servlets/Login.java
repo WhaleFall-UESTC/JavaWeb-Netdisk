@@ -28,6 +28,7 @@ public class Login extends ViewBaseServlet {
         if(user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user.getName());
+            System.out.println(user.getName() + " login success");
 
             response.sendRedirect("/listfiles");
             // 告诉客户端的浏览器重定向到一个新的URL

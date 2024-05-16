@@ -33,6 +33,7 @@ public class Listfiles extends ViewBaseServlet {
         String userRoot = fileRoot + "\\" + uname;
         File folder = new File(userRoot);
         File[] listOfFiles = folder.listFiles();
+
         System.out.println("len: " + listOfFiles.length);
 
         List<File> files = new ArrayList<>();
