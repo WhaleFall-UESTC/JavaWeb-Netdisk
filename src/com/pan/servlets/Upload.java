@@ -59,6 +59,8 @@ public class Upload extends HttpServlet {
                 }
             }
         }
+
+        response.sendRedirect("listfiles");
     }
 
     @Override

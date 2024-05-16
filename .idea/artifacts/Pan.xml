@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Pan">
+    <output-path>$PROJECT_DIR$/out/artifacts/Pan</output-path>
+    <root id="archive" name="Pan.war">
+      <element id="artifact" artifact-name="Pan:war exploded" />
+    </root>
+  </artifact>
+</component>

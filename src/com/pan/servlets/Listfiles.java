@@ -28,22 +28,9 @@ public class Listfiles extends ViewBaseServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("user");
 
-        String uname = request.getParameter("uname");
-        System.out.println("uname: " + uname);
-//        String uname = "123";
+        String uname = username;
+
         String userRoot = fileRoot + "\\" + uname;
-
-//        File file = new File(userRoot);
-//        if (!file.exists()) {
-//            System.out.println();
-//            return;
-//        }
-//        File[] files = file.listFiles();
-//
-//        for(int i = 0; i < files.length; i++) {
-//            System.out.println(files[i].getName());
-//        }
-
         File folder = new File(userRoot);
         File[] listOfFiles = folder.listFiles();
         System.out.println("len: " + listOfFiles.length);

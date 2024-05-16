@@ -43,6 +43,8 @@ public class Delete extends HttpServlet {
         } else {
             System.out.println("File not found");
         }
+
+        response.sendRedirect("/listfiles");
     }
 
     @Override

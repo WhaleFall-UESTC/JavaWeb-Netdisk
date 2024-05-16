@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>operation</title>
+<!--    <link rel="stylesheet" href="css/style.css">-->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            background: url("assets/moon.jpeg") center / cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* header盒子整体布局 */
+        header{
+            z-index: 999;
+            display: flex;
+            position: absolute;
+            top: 0 ;
+            left: 0;
+            width:100%;
+            justify-content: space-between;
+            padding: 15px 200px;
+            transition: 0.5s ease ;
+            align-items: center;
+        }
+
+        /* logo的样式 */
+        .brand{
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        header .navigation{
+            position: relative;
+        }
+        /* 页面较大导航栏内容的样式 */
+        header .navigation .navigation-items a{
+            z-index: 999;
+            position: relative;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-left: 30px;
+            transition: 0.3s ease ;
+        }
+        header .navigation .navigation-items a::before{
+            content: "";
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            background-color: #fff;
+            width: 0%;
+            height: 3px;
+            transition: 0.3s ease;
+        }
+        /* 鼠标悬浮产生上面预定的下划线 */
+        header .navigation .navigation-items a:hover:before{
+            width: 100%;
+        }
+
+        main.table {
+            width: 82vw;
+            height: 90vh;
+            background-color: #fff5;
+            box-shadow: 0 8px 16px #475052;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .header {
+            width: 100%;
+            height: 10%;
+            background-color: #fff4;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .shell {
+            width: 95%;
+            max-height: calc(90% - 25px);
+            background-color: #fffb;
+            margin: 8px auto;
+            border-radius: 10px;
+            overflow: auto;
+            /*overflow: overlay;*/
+        }
+        .shell::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        table {
+            width: 100%;
+        }
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            padding: 20px;
+            text-align: left;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        tbody tr:hover {
+            background-color: #fff6 !important;
+        }
+
+        .btn {
+            background-color: #fff6;
+            padding: 5px 0;
+            border-radius: 40px;
+            text-align: center;
+        }
+        button {
+            border: none;
+            background-color: transparent;
+            font-size: medium;
+        }
+
+        #default-btn::file-selector-button{
+            font-size: large;
+            padding: 6px 10px;
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: 3px;
+            cursor: pointer;
+            color: #fff;
+        }
+        #default-btn{
+            font-size: 0;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <!-- 页面较小时的导航栏 -->
+    <div class="menu-btn"></div>
+    <!-- 页面较大时的导航 -->
+    <div class="navigation">
+        <div class="navigation-items">
+            <a href="index.html">logout</a>
+        </div>
+    </div>
+</header>
+
+    <main class="table">
+        <section class="header">
+
+            <form method="post" enctype="multipart/form-data" action="upload">
+                <span>
+                    <input th:value="${session.user}" type="text" name="uname" style="display: none">
+                    <input type="file" name="upfile" id="default-btn">
+                </span>
+                <button style="color: white; font-size: large">Upload</button>
+            </form>
+
+            <form method="get" action="listfiles">
+<!--                <input type="text" name="uname">-->
+                <input th:value="${session.user}" type="text" name="uname" style="display: none">
+                <button style="color: white; font-size: large" >List</button>
+            </form>
+        </section>
+
+        <section class="shell">
+            <table>
+                <tbody>
+                <tr th:each="f:${allfiles}">
+                    <td th:text="${f.getName()}">file name</td>
+                    <td>
+                        <form class="btn" method="get" action="download">
+                            <input th:value="${session.user}" type="text" name="uname" style="display: none">
+                            <input th:value="${f.getName()}" type="text" name="downfile" placeholder="Filename" style="display: none">
+                            <button>Download</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form class="btn" method="post" action="delete">
+                            <input th:value="${session.user}" type="text" name="uname" style="display: none">
+                            <input th:value="${f.getName()}" type="text" name="deletefile" placeholder="Filename" style="display: none">
+                            <button>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+</body>
+</html>

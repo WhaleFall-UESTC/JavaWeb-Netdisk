@@ -29,7 +29,7 @@
         <div class="card border-0 shadow card--register" id="register">
             <div class="card-body">
                 <h2 class="card-title">用户注册</h2>
-                <form method="post" action="register">
+                <form method="post" action="register" id="registerForm">
                     <div class="form-group">
                         <label>
                             <input class="form-control userName" type="text" placeholder="用户名" required="required"
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label>
                             <input class="form-control password" type="password" placeholder="密码" required="required"
-                                   name="password" autocomplete="off"
+                                   id="passwd" autocomplete="off"
                                    onkeyup="this.value=this.value.replace(/\s+/g,'')">
                         </label>
                     </div>
@@ -51,7 +51,8 @@
                                    name="email" autocomplete="off" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
                         </label>
                     </div>
-                    <button class="btn btn-lg" type="submit">注册</button>
+                    <input type="hidden" name="password" id="password">
+                    <button class="btn btn-lg" id="encrypt">注册</button>
                 </form>
             </div>
             <button class="btn btn-back js-btn" data-target="welcome"><i class="fas fa-angle-left"></i></button>
@@ -60,7 +61,7 @@
             <div class="card-body">
                 <h2 class="card-title">用户登录</h2>
                 <br><br>
-                <form method="post" action="login">
+                <form method="post" action="login" id="loginForm">
                     <div class="form-group">
                         <label>
                             <input class="form-control" type="email" placeholder="邮箱" name="email"
@@ -71,11 +72,12 @@
                     <div class="form-group">
                         <label>
                             <input class="form-control" type="password" placeholder="密码" required="required"
-                                   name="password" autocomplete="off"
+                                   id="passwd1" autocomplete="off"
                                    onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
                         </label>
                     </div>
-                    <button class="btn btn-lg" type="submit">登录</button>
+                    <input type="hidden" name="password" id="password1">
+                    <button class="btn btn-lg" id="encrypt1">登录</button>
                 </form>
                 <br><br>
             </div>

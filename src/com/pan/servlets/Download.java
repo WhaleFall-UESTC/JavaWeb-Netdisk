@@ -60,6 +60,8 @@ public class Download extends HttpServlet {
             response.getWriter().write("File not found");
             response.getWriter().close();
         }
+
+        response.sendRedirect("/listfiles");
     }
 
     @Override

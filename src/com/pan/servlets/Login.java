@@ -29,7 +29,7 @@ public class Login extends ViewBaseServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user.getName());
 
-            response.sendRedirect("/select.html");
+            response.sendRedirect("/listfiles");
             // 告诉客户端的浏览器重定向到一个新的URL
 
 
