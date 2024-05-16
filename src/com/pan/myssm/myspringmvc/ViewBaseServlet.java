@@ -1,7 +1,5 @@
 package com.pan.myssm.myspringmvc;
 
-import com.pan.utils.Settings;
-
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -55,8 +53,6 @@ public class ViewBaseServlet extends HttpServlet {
 
         // 5.给模板引擎对象设置模板解析器
         templateEngine.setTemplateResolver(templateResolver);
-
-//        new Settings().GetFileRoot();
     }
 
     protected void processTemplate(String templateName, HttpServletRequest req, HttpServletResponse resp) throws IOException {

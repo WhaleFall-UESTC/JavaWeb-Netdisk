@@ -30,7 +30,7 @@ public class Login extends ViewBaseServlet {
             session.setAttribute("user", user.getName());
             System.out.println(user.getName() + " login success");
 
-            response.sendRedirect("/listfiles");
+            response.sendRedirect("/pan/listfiles");
             // 告诉客户端的浏览器重定向到一个新的URL
 
 

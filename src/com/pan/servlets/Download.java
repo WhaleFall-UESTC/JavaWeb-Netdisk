@@ -1,7 +1,6 @@
 package com.pan.servlets;
 
-import com.pan.utils.Settings;
-
+import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 
 @WebServlet("/download")
 public class Download extends HttpServlet {
@@ -33,8 +33,9 @@ public class Download extends HttpServlet {
             return;
         }
 
-        String fileRoot = new Settings().fileRoot;
-        String userRoot = fileRoot + "\\" + uname;
+        ServletContext context = getServletContext();
+        String fileRoot = Paths.get(context.getRealPath("/pan"), "files").toString();
+        String userRoot = Paths.get(fileRoot, uname).toString();
         File file = new File(userRoot, filename);
 
         if (file.exists() && file.isFile()) {
@@ -61,7 +62,7 @@ public class Download extends HttpServlet {
             response.getWriter().close();
         }
 
-        response.sendRedirect("/listfiles");
+        response.sendRedirect("/pan/listfiles");
     }
 
     @Override

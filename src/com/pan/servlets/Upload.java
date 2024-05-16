@@ -1,11 +1,9 @@
 package com.pan.servlets;
 
-import com.pan.utils.Settings;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,44 +21,53 @@ public class Upload extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("user");
 
-        // String fileRoot = request.getServletContext().getRealPath("/");
+        String fileRoot = Paths.get(request.getServletContext().getRealPath("/pan"), "files").toString();
         String uname = request.getParameter("uname");
         Part part = request.getPart("upfile");
         String upfilename = part.getSubmittedFileName();
 
-        String fileRoot = new Settings().fileRoot;
-        String userRoot = fileRoot + "\\" + uname;
-        System.out.println(userRoot);
+        if (upfilename != null && !upfilename.isEmpty()) {
 
-        Path rootPath = Paths.get(userRoot);
-        Path filePath;
+            String userRoot = Paths.get(fileRoot, uname).toString();
+            System.out.println(userRoot);
 
-        int tmp = 1;
-        int dot = upfilename.lastIndexOf(".");
-        String base = upfilename.substring(0, dot);
-        String ext = upfilename.substring(dot + 1);
-        String newUpfile = upfilename;
+            Path rootPath = Paths.get(userRoot);
+            Path filePath;
 
-        while (true) {
-            filePath = Paths.get(userRoot + "\\" + newUpfile);
-            if (Files.exists(filePath)) {
-                newUpfile = base + " (" + tmp + ")." + ext;
-                tmp += 1;
+            int tmp = 1;
+            int dot = upfilename.lastIndexOf(".");
+            String base;
+            String ext;
+            if (dot < 0) {
+                base = upfilename;
+                ext = "";
             } else {
-                try {
-                    System.out.println("Try upload " + userRoot + "\\" + newUpfile);
-                    part.write(userRoot + "\\" + newUpfile);
-                    break;
-                } catch (IOException e) {
-                    if (!Files.exists(rootPath)) {
-                        Files.createDirectories(rootPath);
+                base = upfilename.substring(0, dot);
+                ext = upfilename.substring(dot + 1);
+            }
+
+            String newUpfile = upfilename;
+
+            while (true) {
+                filePath = Paths.get(userRoot, newUpfile);
+                if (Files.exists(filePath)) {
+                    newUpfile = base + " (" + tmp + ")." + ext;
+                    tmp += 1;
+                } else {
+                    try {
+                        System.out.println("Try upload " + userRoot + "\\" + newUpfile);
+                        part.write(Paths.get(userRoot, newUpfile).toString());
+                        break;
+                    } catch (IOException e) {
+                        if (!Files.exists(rootPath)) {
+                            Files.createDirectories(rootPath);
+                        }
+                        e.printStackTrace();
                     }
-                    e.printStackTrace();
                 }
             }
         }
-
-        response.sendRedirect("listfiles");
+        response.sendRedirect("/pan/listfiles");
     }
 
     @Override

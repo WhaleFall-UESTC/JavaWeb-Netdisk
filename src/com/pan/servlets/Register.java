@@ -3,8 +3,8 @@ package com.pan.servlets;
 import com.pan.bean.User;
 import com.pan.dao.UserDAO;
 import com.pan.myssm.myspringmvc.ViewBaseServlet;
-import com.pan.utils.Settings;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +31,8 @@ public class Register extends ViewBaseServlet {
         UserDAO userDAO = new UserDAO();
         boolean flag = userDAO.register(user);
         if(flag){
-            String fileRoot = new Settings().fileRoot;
+            ServletContext context = getServletContext();
+            String fileRoot = Paths.get(context.getRealPath("/pan"), "files").toString();
             Files.createDirectories(Paths.get(fileRoot, name));
             System.out.println("Register successfully!");
             request.setAttribute("errorMsg", "Register successfully, please login now!");

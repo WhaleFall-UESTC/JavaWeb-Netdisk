@@ -1,7 +1,8 @@
 package com.pan.servlets;
 
-import com.pan.utils.Settings;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,20 +20,21 @@ public class Delete extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
-        String fileRoot = new Settings().fileRoot;
+        ServletContext context = getServletContext();
+        String fileRoot = Paths.get(context.getRealPath("/pan"), "files").toString();
 
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("user");
 
         String uname = request.getParameter("uname");
-        String userRoot = fileRoot + "\\" + uname;
+        String userRoot = Paths.get(fileRoot, uname).toString();
         String filename = request.getParameter("deletefile");
         if (filename == null || "".equals(filename.trim())) {
             response.getWriter().write("Input the filename");
             return;
         }
 
-        Path filePath = Paths.get(userRoot + "\\" + filename);
+        Path filePath = Paths.get(userRoot, filename);
         if (Files.exists(filePath) && Files.isRegularFile(filePath)) {
             try {
                 Files.delete(filePath);
@@ -44,7 +46,7 @@ public class Delete extends HttpServlet {
             System.out.println("File not found");
         }
 
-        response.sendRedirect("/listfiles");
+        response.sendRedirect("/pan/listfiles");
     }
 
     @Override

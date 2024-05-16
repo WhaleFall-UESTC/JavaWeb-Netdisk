@@ -1,9 +1,8 @@
 package com.pan.servlets;
 
-import com.pan.dao.UserDAO;
-import com.pan.utils.Settings;
 import com.pan.myssm.myspringmvc.ViewBaseServlet;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,18 +23,24 @@ public class Listfiles extends ViewBaseServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
-        String fileRoot = new Settings().fileRoot;
+
+        ServletContext context = getServletContext();
+        String fileRoot = Paths.get(context.getRealPath("/pan"), "files").toString();
 
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("user");
 
         String uname = username;
 
-        String userRoot = fileRoot + "\\" + uname;
+        String userRoot = Paths.get(fileRoot, uname).toString();
         File folder = new File(userRoot);
         File[] listOfFiles = folder.listFiles();
 
-        System.out.println("len: " + listOfFiles.length);
+        try {
+            System.out.println("len: " + listOfFiles.length);
+        } catch (NullPointerException e) {
+
+        }
 
         List<File> files = new ArrayList<>();
 
